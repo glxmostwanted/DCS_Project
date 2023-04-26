@@ -1,0 +1,355 @@
+DOI：10.19666/j.rlfd.202206100 
+基于自适应协同下垂的飞轮储能联合火电 机组一次调频控制策略 
+洪  烽，梁  璐，逄亚蕾，季卫鸣，贾欣怡，房  方 
+（华北电力大学控制与计算机工程学院，北京  102206） 
+［摘要］随着“双碳”目标的提出，新能源装机总量不断提高，对电网频率安全提出了更大的挑战。飞轮储能凭借其响应速度快、充放电次数多等优点，在联合火电机组参与调频、提升电网频率安全方面受到广泛关注。为更加充分利用飞轮储能辅助电网调频的快速性优势，设计了一种基于自适应协同下垂的飞轮储能联合火电机组一次调频控制策略，实现了火-储联合系统的功率协同自适应调整。仿真验证表明，所提出的控制策略可以有效改善火-储联合系统的调频性能，相比传统下垂控制，系统最大动态频差和稳态频差分别减少了29.00%和25.50%，缓解了火电机组调频压力，有利于火电机组安全稳定运行。 
+［关键词］自适应协同下垂；飞轮储能；一次调频；非线性分解；Logistic回归函数 
+［引用本文格式］洪烽, 梁璐, 逄亚蕾, 等. 基于自适应协同下垂的飞轮储能联合火电机组一次调频控制策略[J]. 热力发电, 2023, 52(1): 36-44.   HONG Feng, LIANG Lu, PANG Yalei, et al. Primary frequency regulation of flywheel energy storage combined thermal power unit based on adaptive coordinated droop control[J]. Thermal Power Generation, 2023, 52(1): 36-44. 
+Primary frequency regulation of flywheel energy storage combined thermal  power unit based on adaptive coordinated droop control 
+HONG Feng, LIANG Lu, PANG Yalei, JI Weiming, JIA Xinyi, FANG Fang 
+(School of Control and Computer Engineering, North China Electric Power University, Beijing 102206, China) 
+Abstract: With the proposal of “carbon peaking and carbon neutral”, the total installed capacity of renewable energy power units continues to increase. This may greatly challenge the safety and stability of power grid. The characteristics of flywheel energy storage system (FESS) are fast response, unlimited times of charge and discharge and deep depth of discharge. FESS has been widely used in frequency modulation and frequency safety improvement of power grid. In order to make full use of the advantage of flywheel energy storage in auxiliary frequency modulation of the power grid, an adaptive coordinated droop control strategy of primary frequency regulation coordinated with thermal power units was designed, which realized the power cooperative adaptive adjustment of the combined coal-fired thermal power units and storage systems. Simulation results show that, the proposed control strategy can effectively improve the frequency modulation performance of the combined fire-storage system. Compared with the conventional droop control, the maximum dynamic frequency difference and steady frequency difference of the system reduces by 29.00% and 25.50% respectively, which eases the frequency modulation pressure of thermal power unit, and is benefit to safety and stability of the thermal power unit. 
+Key words: adaptive coordinated droop; flywheel energy storage; primary frequency regulation; nonlinear decomposition; Logistic regression function 
+在“双碳”目标的指引下，中央财经委员会提出构建清洁低碳安全高效的能源体系，构建以新能源为主体的新型电力系统，预计到2030年，全国风光装机总量将达到12亿kW·h[1-2]。新能源的波动性
+和随机性严重威胁了电网频率安全，如何提升新型电力系统调频性能成为当前电力系统稳定性研究的热点问题[3]。 
+短期内，火电机组仍是电网调频的主要资源[4]。随着新能源的大规模并网，其大惯性大迟延特性带来的调频响应速度慢、受运行工况影响大等问题逐渐凸显[5]。储能辅助传统火电机组调频，一方面可以改善调频质量，另一方面可以减缓机组出力波动，保障机组运行的安全性和经济性[6]。 
+随着国家相关政策的大力推行，储能技术得到快速发展，火电机组配置储能参与电力系统调峰调频的控制策略成为研究热点。肖春梅[7]依据有关政策，对电厂相关数据进行分析计算，得出应用电储能提升火电机组调频性能是安全经济可行的重要结论。邓霞等[8]通过建立符合调频需求的储能电池模型，验证了火储联合系统相比传统机组在电网调频方面的优势。李欣然等[9]提出电储能参与一次调频的自适应控制策略，但未考虑电池荷电状态（state of charge，SOC）对储能输出功率的影响。Pandzic等人[10]通过虚拟惯性控制与下垂控制结合，缓解负荷扰动初期频率的恶化程度，但一次调频效果稍显不足。当前研究大多针对电池储能进行研究，飞轮储能作为一种功率型储能，在响应速度及运行寿命上有更大的优势。飞轮储能具有响应速度快、寿命长、充放电次数多等优势，十分适合由快速负荷扰动引起的一次调频，在储能系统辅助参与电网调频领域受到广泛关注[11]。因此，研究飞轮储能系统联合火电机组进行调频控制，对提高电网调频能力具有重要意义。张兴等[12]通过模拟火储联合调频运行和计算调频补偿收益，验证了飞轮储能参与联合调频具有良好的全生命周期经济性。隋云任等[6]验证了飞轮储能系统辅助燃煤机组调频在提高调频质量的同时可以降低汽轮机输出功率波动和锅炉主蒸汽压力波动。何林轩等[13]建立了飞轮下垂控制参与电网一次调频的两区域模型，并证明了飞轮储能系统对一次调频具有很好的支撑作用。罗耀东等[14]提出一种考虑抑制反向调频和储能电量管理的火电机组-飞轮储能协调控制策略，并基于一次调频考核指标进行了储能容量优化配置。Peralta等人[15]设计了飞轮储能系统连接到电力系统的一次调频动态模型，并研究了其对系统稳定性的影响。 
+综上所述，火电-飞轮储能联合系统参与电网调频对于改善系统频率稳定性具有重要意义。但飞轮储能系统的控制策略大多采用虚拟下垂控制，独立于火电机组的响应特性，没有充分考虑火电机组响应速度慢等问题，不能充分利用飞轮储能系统的快速性。 
+现阶段，对火电机组与飞轮储能协同出力的控制策略的相关研究较少。对此，本文提出一种基于自适应协同下垂的飞轮储能联合火电机组一次调频控制策略：首先，对火-储联合系统的一次调频指令进行功率自适应分配，得到适应各自调频特性的最佳参考功率，由飞轮承担调频指令中的快变部分，火电机组承担调频指令中的慢变部分；然后，引入Logistic回归函数来约束飞轮储能在不同SOC下出力的最大值，实现飞轮储能联合火电机组的自适应协同下垂控制；最后，通过仿真验证了所提控制策略的有效性。 
+1 两区域电网一次调频模型 
+当出现负荷扰动时，电网频率发生波动，火电机组与飞轮储能系统共同对信号作出反应，以抑制频率的波动。本文建立的含飞轮储能系统的两区域电网调频模型框图如图1所示。该模型由火电机组，飞轮储能系统、发电机-负荷模型、自适应协同下垂控制模块等组成[16]。 
+对于火电机组的建模，选取再热式汽轮机，考虑高压、中间再热、低压容积的影响，简化的汽轮机模型可用以下传递函数表示[17]： 
+    (1) ..HPIPenCHCHRHLPCHRHCO1(1)(1)            (1)(1)(1)FFGssTsTsTFsTsTsT.........
+
+式中：FHP、FIP、FLP为汽轮机高、中、低压缸的功率系数；TCH、TRH、TCO为高压蒸汽、再热蒸汽、低压蒸汽的容积时间常数；Gen(s)为汽轮机模型传递函数。 
+调速器模型采用传递函数： 
+            (2) ..OVg11GssT..
+
+式中：GOV(s)为调速器模型传递函数；Tg为调速器时间常数。 
+发电机-负荷模型采用传递函数： 
+            (3) ..12GsHsD..
+
+式中：G(s)为发电机负荷模型传递函数，H为发电
+机惯性常数；D为发电机负荷阻尼系数。 
+联络线采用传递函数： 
+             (4) ..12t2πTGss.
+
+式中：Gt(s)为联络线传递函数；T12为联络线同步系数。 
+目前，飞轮储能系统一般使用永磁同步电机作为储能单元，因此永磁同步电机的变转速过程可以视作飞轮储能系统的充放电过程，通过模拟永磁同步电机的数学过程可以表征飞轮储能系统的调频过程[6]。永磁同步电机在两相旋转坐标系下的完整数学模型如式(5)—式(8)所示。 
+电压方程： 
+        (5) sesedddddddqqqqduRituRit...................
+
+磁链方程： 
+            (6) fdddqqqLiLi...........
+
+电磁转矩及电磁功率方程： 
+        (7) epeee1.5()dqqdTniiPT.........
+
+运动方程： 
+         (8) meLmddJTTBt.....
+
+式中：下标d、q分别为两相旋转坐标系中d、q轴的相应分量；u为电机电压，V；Ψ为定子磁链，Wb；Rs为定子绕组电阻，Ω；ωe为转子电角速度，rad/s；i为电机电流，A；L为同步电感，H；Ψf为转子磁链，Wb；np为电机极对数；Te为电磁转矩，N·m；Pe为电机输出功率，MW；TL为负载转矩，N·m；ωm为转子机械角速度，rad/s；J为电机和负载折算的转动惯量，kg·m2；B为阻尼系数，N·m·s。 
+ 
+
+H为发电机惯性时间常数；D为阻尼系数；ΔPL1、ΔPL2为负荷扰动量，MW；Δf1、Δf2为区域电网频率变化量，Hz；ΔPT12为联络线交换功率，MW。 
+图1 含飞轮储能的电网模型 
+Fig.1 Power grid model with flywheel energy storage 
+2 自适应协同下垂的飞轮储能联合火电机组调频控制 
+2.1 控制策略整体框架 
+传统的虚拟下垂控制没有充分考虑火电机组响应速度较慢容易引起的频率跌落，本文充分考虑火电机组迟滞严重、响应速度慢的特性，设计基于下垂控制的自适应功率分配控制策略，通过飞轮储能系统协同火电机组参与调频，充分发挥飞轮储能系统调频优势。 
+然而，虽然飞轮储能在调频方面的效果远比传统机组好，但其装机容量小、成本昂贵，为了充分利用其调频特性，需要尽可能将荷电状态保持在合理范围，因此本文策略将飞轮储能的实时SOC纳入考虑，对飞轮的实时输出功率进行约束。 
+根据以上分析，提出一种基于自适应协同下垂的飞轮储能联合火电机组一次调频的控制策略，整体控制策略框架如图2所示，主要包括基于非线性分解的功率自适应分配模块和飞轮储能输出功率的约束控制模块。
+ 
+
+Δf为系统频率偏差，Hz；PG为火电机组实时一次调频指令，MW；KG为火电机组功频静态特性系数；Kf为飞轮储能系统虚拟下垂系数；SSOC为飞轮储能系统实时荷电状态；Pgref为自适应功率分配给火电机组的输出参考功率，MW；Pfref为自适应功率分配给飞轮储能系统输出参考功率，MW； Pref, PESS为约束控制飞轮储能输出参考功率，MW；PF为飞轮储能系统实际输出功率，MW。 
+图2 基于自适应协同下垂的飞轮储能联合火电机组一次调频整体控制策略框图 
+Fig.2 Block diagram of the integrated control strategy for primary frequency regulation of flywheel energy storage combined thermal power unit based on adaptive coordinated droop control
+2.2 基于非线性分解的功率自适应分配 
+电网频率出现偏差后，火电机组需要快速升降负荷以保持电网功率平衡，但是其调节速度受到机组当前运行状态影响，频繁快速地变负荷也会对火电机组执行机构带来磨损，不利于设备安全运行。 
+为了充分利用飞轮储能的快速性，减少火电机组出力波动，本文将原火电机组一次调频指令进行非线性分解，将分解后的信号分配到飞轮储能系统和火电机组中，建立起火-储联合系统协同调度机制，由飞轮储能系统响应分解出的快变信号，火电机组响应分解出的慢变信号，充分利用飞轮储能响应快和火电机组调频容量大的优势，共同组成飞轮储能联合火电机组的自适应协同下垂控制。该方案可以有效减缓机组出力波动，快速稳定电网频率。 
+原火电机组一次调频的功率指令即为非线性指令分解模块的输入，具体计算公式如下： 
+             (9) GG×PKf...
+
+其中，自适应模块可以对指令信号PG(s)进行分解，将分解后的信号分配到储能系统和传统火电中，建立起系统间联合调度机制，充分利用储能系统的快速性平抑负荷波动。采用文献[18]的非线性信号分解方法将调频指令信号PG(s)分解为慢变信号和快变信号： 
+    (10) G0G0G()()()[1()]()PsNxPsNxPs...
+
+式中：N0(x)为速率限制环节的描述函数。 
+速率限制是一个非线性环节，该环节的输出与上一时刻的输出和此刻的输入有关，其描述为： 
+     (11) (1)   if  ()()                 if (1)   if  xktRrRxkukRrRxktRrR..............，＞，≤≤，＜
+
+式中：u为输入；x为输出；k代表当前时刻；k–1代表上一时刻；Δt为计算步长；R为速率限制值；r为当前输入信号变化速率，计算式为式(12)。 
+           (12) ()(1)ukxkrt....
+
+调频指令多尺度非线性分解流程如图3所示。为了火电机组安全稳定运行，设置速度限制环节的R取值为1%Pe/min，Pe为火电机组额定功率。火电机组输出参考功率Pgref为非线性指令分解中慢变信号，飞轮储能系统的输出参考功率PFref为下垂控制参考功率与非线性指令分解中快变信号Pfref之和。经过功率自适应分配后得到的火电机组和飞轮储能系统输出参考功率为： 
+           (13) gref0Gfref0GFrefffref()[1()]PNxPPNxPPKfP............
+
+ 
+
+图3 调频指令非线性分解 
+Fig.3 Nonlinear decomposition of the frequency  modulation command 
+2.3 飞轮储能功率约束控制策略 
+为平滑飞轮的出力，防止过充过放，采用Logistic回归函数对飞轮不同SOC下出力的最大值进行约束。飞轮储能的荷电状态监控模块通过监测储能系统实时出力PF，由式(14)计算得到实时SOC信号，传递给Logictic回归约束模块对储能系统输出参考功率进行限制。 
+           (14) F0SOCSOC0dtPtSSE...
+
+式中：SSOC0为初始荷电状态；E为飞轮储能系统总储电量，MW·h。 
+Logistic回归约束模块将综合考虑飞轮储能的实时SOC和实时需求功率，最终得到飞轮储能系统约束控制后输出功率参考值。引入荷电状态改造后的Logistic回归函数可以得到每个SOC下的输出功率限制值[19]，该函数表达式为： 
+          (15) SOCSOC,minSOCSOC,minmd0eerSSbrSSbKPPPKP........（）（）
+
+         (16) SOC,maxSOCSOC,maxSOCmc0eerSSbrSSbKPPPKP........（）（）
+
+式中：Pd为飞轮储能的约束放电功率，MW；Pc为飞轮储能的约束充电功率，MW；Pm为储能系统额定功率，MW；SSOC,max、SSOC,min分别为储能荷电状态最大值、最小值；K、P、P0、b、r为Logistic函数内部参数，为常量，具体取值见表1。 
+表1 Logistic函数内部参数 
+Tab.1 Parameters of Logistic function 
+项目 
+ 数值 
+ 
+K 
+ 6 
+ 
+P 
+ 1/315 
+ 
+P0 
+ 0.01 
+ 
+b 
+ 0.4 
+ 
+r 
+ 13 
+ 
+
+根据系统频率偏差的大小，飞轮储能参与电网一次调频可以分为以下3种工况。 
+1）|.f |≤0.033 Hz 
+此时系统频率偏差信号处于储能系统动作死区，储能出力处于闭锁状态，与电网不进行功率交换。 
+           (17) ref,FESS0P.
+
+式中：Pref,FESS为出力约束控制后飞轮输出功率参考值。 
+2）.f＜–0.033 Hz 
+该情况下，飞轮储能需要放电以减少因系统机械功率小于电磁功率而引起的频率偏差。经过出力约束控制后的飞轮储能输出功率参考值为： 
+   (18) ref,FESSmSOCFSOCSOeCrfd                 0.8()   0.20.80                   min,0.2PPPSPSS......，≥，＜＜，≤
+
+3）.f ＞0.033 Hz 
+该情况下，飞轮储能需要充电以减少因系统机械功率大于电磁功率而引起的频率偏差。经过出力约束控制后的飞轮储能输出功率参考值为： 
+  (19) FrefcSOCref,FESSSOCmSOCm0                        0.8()  0.20.8                 0.2in,PPSPSPS........，≥，＜＜，≤
+
+2.4 控制策略评价指标 
+为了评估本文控制策略应用于电网一次调频的有效性，采用以下指标评价调频效果[20]。 
+当负荷扰动为阶跃扰动时，通过观察最大动态频率偏差Δfmax和稳态频率偏差Δfs评价系统调频性能；当负荷扰动为连续扰动时，通过计算频率峰谷差Δfp–v、频率偏差的标准差fSD、两区域之间交换功率的峰谷差ΔP12p–v和标准差P12SD评价区域电网调频能力及稳定性。 
+         (20) 2SD11()NiifffN......
+
+       (21) 212SD121211()NiiPPPN......
+
+式中：Δfi为第i时刻的电网频率偏差；为连续扰动下电网频率偏差的平均值；ΔP12i为第i时刻的交换功率偏差；为交换功率的平均值；N为采样点总量。 f.
+12P.
+
+3 仿真分析 
+在Simulink仿真平台搭建含飞轮储能的两区域电网一次调频模型，选取火电机组和区域电网模型仿真参数见表2，飞轮储能系统各项参数见表3。火电机组额定功率350 MW，电网额定频率50 Hz，文中相关参数采用标幺值，以350 MW、50 Hz为基准值。选取的飞轮储能系统功率及容量配置为5 MW/ 0.25 MW·h，仿真结果验证了本文提出的控制策略在参与电网调频方面的优越性。 
+表2 火电机组仿真参数 
+Tab.2 Simulation parameters of thermal power units 
+项目 
+ 数值 
+ 
+调速器时间常数Tg/s 
+ 0.08 
+ 
+机组功频特性系数KG 
+ 20 
+ 
+高压蒸汽容积时间常数TCH/s 
+ 0.3 
+ 
+中压蒸汽容积时间常数TRH/s 
+ 10 
+ 
+低压蒸汽容积时间常数TCO/s 
+ 0.5 
+ 
+高压缸功率系数FHP 
+ 0.3 
+ 
+中压缸功率系数FIP 
+ 0.3 
+ 
+低压缸功率系数FLP 
+ 0.4 
+ 
+联络线同步系数T12 
+ 0.881 
+ 
+发电机惯性常数H 
+ 2 
+ 
+发电机负荷阻尼系数D 
+ 12 
+ 
+
+表3 飞轮储能系统参数 
+Tab.3 Parameters of flywheel storage system 
+项目 
+ 数值 
+ 
+定子电阻Rs/Ω 
+ 0.097 
+ 
+永磁磁链Ψf/Wb 
+ 0.128 6 
+ 
+粘滞摩擦系数B/(N·m·s) 
+ 1 100 
+ 
+定子电感L/mH 
+ 2.085 
+ 
+极对数np 
+ 2 
+ 
+飞轮转动惯量J/(kg·m2) 
+ 24.2 
+ 
+
+3.1 阶跃扰动 
+t=1 s时，在区域1和区域2加入阶跃负荷扰动，幅值分别为0.026 p.u.和0.013 p.u.，仿真时间设为  25 s，得到的一次调频仿真结果如图4—图6所示，阶跃扰动下不同策略的调频效果评价指标结果见表4。由图4可以看出，飞轮储能辅助火电机组调频可以有效提升系统调频效果。相比于下垂控制，本文提出的自适应协同下垂控制策略对系统频差的抑制作用和频率恢复作用更明显，系统最大动态频差Δfmax减少29.00%，稳态频差Δfs减少25.50%。 
+ 
+
+图4 不同控制策略下频率偏差变化曲线 
+Fig.4 Frequency deviation curve under different  control strategies 
+ 
+
+图5 不同控制策略下火电机组输出功率曲线 
+Fig.5 Output power curves of thermal power unit under different control strategies 
+ 
+
+图6 不同控制策略下飞轮储能输出功率曲线 
+Fig.6 Output power curves of flywheel energy storage under different control strategies 
+表4 阶跃扰动下评价结果 
+Tab.4 Evaluation results under step disturbance 
+控制策略 
+ Δfmax/(×10–3 p.u.) 
+ Δfs/(×10–3 p.u.) 
+ 
+本文策略 
+ –0.896 
+ –0.672 
+ 
+下垂控制 
+ –1.262 
+ –0.902 
+ 
+无储能 
+ –1.942 
+ –1.026 
+ 
+
+由图5和图6可知，当飞轮储能系统参与调频时，飞轮承担了一部分调频出力任务，火电机组出力明显减缓，机组实际最大输出功率变化量由7.23×10–3 p.u.减少为4.76×10–3 p.u.，采用本文策略使火电机组输出功率进一步减少到9.97×10–4 p.u.；相应地，飞轮储能系统的输出功率极值由下垂控制下的1.0×10–2 p.u.提高到1.42×10–2 p.u.，稳态下飞轮储能的输出功率提升为下垂控制的2.77倍，说明本文策略可充分利用飞轮功率高、响应快的优势，为火电机组分担调频压力，有利于机组安全稳定运行。 
+3.2 连续扰动 
+实际上，在电网运行过程中，引起机组进行一次调频的频率波动一般是由连续无规律的小幅度
+负荷快速波动引起的，为了验证本文策略在电网实际运行时的调频效果，需要在连续扰动的情况下进行仿真。在MATLAB中生成幅值范围在[–0.03, 0.03]p.u.和[–0.015, 0.015]p.u.的随机序列作为连续扰动信号，将该扰动信号作为两区域的负荷波动加入仿真模型。 
+选择飞轮储能下垂控制作为对照组，研究在连续扰动下系统频率、汽轮机输出功率、飞轮储能输出功率、荷电状态和区域交换功率的变化情况，不同控制策略下调频效果的评价指标见表5，仿真结果如图7—图11所示。 
+表5 连续扰动下不同控制策略调频效果的评价结果 
+Tab.5 Evaluation results of frequency regulation effect of different control strategies under continuous disturbance 
+控制策略 
+ 频率/(×10–3 p.u.) 
+  
+ 功率/(×10–3 p.u.) 
+ 
+Δfp–v 
+ fSD 
+  
+ ΔP12p–v 
+ P12SD 
+ 
+本文策略 
+ 2.378 
+ 0.576 
+  
+ 8.392 
+ 1.555 
+ 
+下垂控制 
+ 2.991 
+ 0.836 
+  
+ 11.531 
+ 2.185 
+ 
+无储能 
+ 4.628 
+ 1.028 
+  
+ 14.951 
+ 2.535 
+ 
+
+ 
+
+图7 连续扰动下系统频率偏差变化曲线 
+Fig.7 System frequency deviation curve under continuous disturbance 
+ 
+
+图8 连续扰动下汽轮机输出功率曲线 
+Fig.8 Output power curve of steam turbine under continuous disturbance 
+ 
+
+图9 连续扰动下飞轮储能输出功率曲线 
+Fig.9 Output power curve of flywheel energy storage under continuous disturbance 
+ 
+
+图10 连续扰动下飞轮储能系统荷电状态曲线 
+Fig.10 SOC curve of flywheel energy storage system under continuous disturbance 
+ 
+
+图11 连续扰动下联络线交换功率变化曲线 
+Fig.11 Exchange power curve on tie lines under  continuous disturbance 
+由表5可知，在连续负荷扰动下，本文控制策略下的频率峰谷差Δfp–v比下垂控制减少了20.49%，说明本文控制策略可以有效减小系统频率波动。本文控制策略的频率偏差波动指标fSD比下垂控制减少了31.10%。结合图7可知，本文控制策略下系统频率波动的曲线相比下垂控制更稳定，且波动幅度更小，在维持频率稳定的性能上有了明显提升。 
+由图8—图9可以看出，在本文控制策略下机组出力波动明显减小，输出功率峰值由1.737×10–3 p.u.减小为1.048×10–3 p.u.，输出功率标准差由 0.392×10–3 p.u.减小为0.176×10–3 p.u.。飞轮储能输出功率峰值和   标准差相比下垂控制分别增加了2.409×10–3 p.u.、4.240×10–3 p.u.。 
+由图10可知，在本文控制策略下，飞轮储能的荷电状态变化范围更大，充放电更加灵活，充分利用了飞轮储能的调频优势，荷电状态峰谷差由4.433×10–3 p.u.增加到1.083×10–2 p.u.，在整个调频过程中飞轮储能的荷电状态良好。可见，在本文控制策略下，飞轮储能系统能够快速出力以响应频差信号，承担了更多的调频需求，有效分担火电机组的调频压力，保护机组设备。 
+由图11结合表5可知，在本文控制策略下，两区域间联络线上的交换功率峰谷差ΔP12p–v减少了27.22%，标准差P12SD减少了28.83%。因此，飞轮储能的自适应控制策略不仅可以提升火电机组调频性能，还可以降低两区域联络线上的交换功率的波动范围。 
+4 结  论 
+为了应对大规模新能源并网带来的频率安全挑战，本文提出了一种基于自适应协同下垂的飞轮储能联合火电机组一次调频的控制策略，建立了两区域电网调频模型，对电网一次调频的过程进行了仿真研究，得出以下结论： 
+1）相比于下垂控制，本文提出的基于自适应协同下垂的飞轮储能联合火电机组一次调频控制策略对系统频差的抑制作用和频率恢复作用更明显：在阶跃扰动下，系统最大动态频差减小了29.00%，稳态偏差减小了25.50%；在连续扰动时，系统频率偏差的峰谷差及标准差分别减小了20.49%和31.10%。 
+2）在本文控制策略下，飞轮储能承担了更多的调频需求，火电机组出力波动明显变小，同时机组输出功率的变化范围缩小，充分利用了飞轮功率高、响应快的优势，有效分担了火电机组调频压力，有利于机组安全稳定运行。 
+3）相比于传统虚拟下垂控制，本文方法可以明显降低两区域之间联络线上的交换功率的波动范围，有利于联络线上交换功率的稳定。 
+［参 考 文 献］ 
+［1］ 李晖, 刘栋, 姚丹阳. 面向碳达峰碳中和目标的我国电力系统发展研判[J]. 中国电机工程学报, 2021, 41(18): 6245-6258.  
+LI Hui, LIU Dong, YAO Danyang. Analysis and reflection on the development of power system towards the goal of carbon emission peak and carbon neutrality[J]. Proceedings of the CSEE, 2021, 41(18): 6245-6258.  
+［2］ 习近平. 继往开来, 开启全球应对气候变化新征程: 在气候雄心峰会上的讲话[N]. 中华人民共和国国务院公报, 2020(35): 7.  
+XI Jinping. Building on past achievements and launchinga new journey for global climate actions: statement at the climate ambition summit[N]. Gazette of the State Council of the People’s Republic of China, 2020(35): 7.  
+［3］ 孙华东, 王一鸣, 高磊, 等. 高比例电力电子电力系统稳定性的统一性判据研究(一): 场站稳定判据[J]. 中国电机工程学报, 2022, 42(5): 1713-1723.  
+SUN Huadong, WANG Yiming, GAO Lei, et al. Research on unification stability criterion for the power electronics dominated power system (Ⅰ): criterion of the power-electronic interfaced plant[J]. Proceedings of the CSEE, 2022, 42(5): 1713-1723.  
+［4］ 李玲, 刘鑫屏. 新能源大规模并网条件下火电机组深度调峰控制策略优化[J]. 中国电力, 2020, 53(1): 155-161.  
+LI Ling, LIU Xinping. Control strategy optimization for thermal power unit adapted to deep peak shaving for large-scale new energy source integration[J]. Electric Power, 2020, 53(1): 155-161.  
+［5］ 张顺, 闫培飞, 姚洪宇, 等. 亚临界汽包炉深度调峰安全性评估及控制优化技术[J]. 中国电力, 2020, 53(7): 203-210.  
+ZHANG Shun, YAN Peifei, YAO Hongyu, et al. Safety evaluation and control optimization technology for in-depth peak-shaving of subcritical drum boiler[J]. Electric Power, 2020, 53(7): 203-210.  
+［6］ 隋云任, 梁双印, 黄登超, 等. 飞轮储能辅助燃煤机组调频动态过程仿真研究[J]. 中国电机工程学报, 2020, 40(8): 2597-2606.  
+SUI Yunren, LIANG Shuangyin, HUANG Dengchao, et al. Simulation study on frequency modulation process of coal burning plants with auxiliary of flywheel energy storage[J]. Proceedings of the CSEE, 2020, 40(8): 2597-2606.  
+［7］ 肖春梅. 电储能提升火电机组调频性能研究[J]. 热力发电, 2021, 50(6): 98-105.  
+XIAO Chunmei. Research on using electric energy storage to improve frequency regulation performance of thermal power units[J]. Thermal Power Generation, 2021, 50(6): 98-105.  
+［8］ 邓霞, 孙威, 肖海伟. 储能电池参与一次调频的综合控制方法[J]. 高电压技术, 2018, 44(4): 1157-1165.  
+DENG Xia, SUN Wei, XIAO Haiwei. Integrated control strategy of battery energy storage system in primary frequency regulation[J]. High Voltage Engineering, 2018, 44(4): 1157-1165.  
+［9］ 李欣然, 崔曦文, 黄际元, 等. 电池储能电源参与电网一次调频的自适应控制策略[J]. 电工技术学报, 2019, 34(18): 3897-3908.  
+LI Xinran, CUI Xiwen, HUANG Jiyuan, et al. The selfadaption control strategy of energy storage batteries participating in the primary frequency regulation[J]. Transactions of China Electrotechnical Society, 2019, 34(18): 3897-3908.  
+［10］ PANDZIC H, BOBANAC V. An accurate charging model 
+of battery energy storage[J]. IEEE Transactions on Power Systems, 2019, 34(2): 1416-1426.  
+［11］ 王建业. 大功率飞轮储能系统转子设计与充放电控制研究[D]. 北京: 华北电力大学, 2019: 1.  
+WANG Jianye. Research on motor design and charge and discharge control of high power flywheel energy storage system[D]. Beijing: North China Electric Power University, 2019: 1. 
+［12］ 张兴, 阮鹏, 张柳丽, 等. 飞轮储能在华中区域火电调频中的应用分析[J]. 储能科学与技术, 2021, 10(5): 1694-1700.  
+ZHANG Xing, RUAN Peng, ZHANG Liuli, et al. Application analysis of flywheel energy storage in thermal power frequency modulation in central China[J]. Energy Storage Science and Technology, 2021, 10(5): 1694-1700.  
+［13］ 何林轩, 李文艳. 飞轮储能辅助火电机组一次调频过程仿真分析[J]. 储能科学与技术, 2021, 10(5): 1679-1686.  
+HE Linxuan, LI Wenyan. Simulation analysis of primary frequency modulation process of thermal power units with auxiliary of flywheel energy storage[J]. Energy Storage Science and Technology, 2021, 10(5): 1679-1686.  
+［14］ 罗耀东, 田立军, 王垚, 等. 飞轮储能参与电网一次调频协调控制策略与容量优化配置[J]. 电力系统自动化, 2022, 46(9): 71-82.  
+LUO Yaodong, TIAN Lijun, WANG Yao, et al. Coordinated control strategy and capacity optimization of primary frequency regulation for flywheel energy storage system[J]. Aotomation of Electric Power Systems, 2022, 46(9): 71-82.  
+［15］ PERALTA D, CANIZARES C, BHATTACHARYA K. Practical modeling of flywheel energy storage for primary frequency control in power grids[C]. 2018 IEEE Power & Energy Society General Meeting (PESGM). IEEE, 2018.  
+［16］ 吴天宇. 基于模糊控制理论的两区域互联电网AGC的研究[D]. 长沙: 长沙理工大学, 2016: 1.  
+WU Tianyu. Research on AGC of two area interconnected power grid based on fuzzy control theory[D]. Changsha: Changsha University of Science & Technology, 2016: 1.  
+［17］ 杜鸣. 火电机组灵活运行下的负荷频率控制优化研 究[D]. 北京: 华北电力大学, 2021: 1.  
+DU Ming. Research on load frequency control optimi-zation ofthermal power unit under flexible operation[D]. Beijing: North China Electric Power University, 2021: 1.  
+［18］ 邓拓宇, 田亮, 刘吉臻. 供热机组负荷指令多尺度前馈协调控制方案[J]. 热力发电, 2016, 45(3): 48-53.  
+DENG Tuoyu, TIAN Liang, LIU Jizhen. Multi-scale feedforward corrdinated control scheme for load command of heat supply units[J]. Thermal Power Generation, 2016, 45(3): 48-53.  
+［19］ 蒋华婷. 储能系统参与自动发电控制的控制策略和容量配置[D]. 北京: 华北电力大学, 2019: 1.  
+JIANG Huating. The control strategy and capacity configuration of energy storage system participating in automatic generation control[D]. Beijing: North China Electric Power University, 2019: 1.  
+［20］ 李军徽, 侯涛, 穆钢, 等. 基于权重因子和荷电状态恢复的储能系统参与一次调频策略[J]. 电力系统自动化, 2020, 44(19): 63-72.  
+LI Junhui, HOU Tao, MU Gang, et al. Primary frequency regulation strategy with energy storage system based on weight factors and state of charge recovery[J]. Auto-mation of Electric Power Systems, 2020, 44(19): 63-72.  
+（责任编辑  李园） 
+ 
+
